@@ -1,13 +1,27 @@
+%{
+#include <stdio.h>
+#include <stdlib.h>
+%}
+
 %%
-if       { printf("Keyword: IF\n"); }
-else     { printf("Keyword: ELSE\n"); }
-while    { printf("Keyword: WHILE\n"); }
-[a-zA-Z]+  { printf("Identifier: %s\n", yytext); }
-[ \t\n]+   ; // Ignore whitespace
-.          ; // Ignore other characters
+
+[0-9]+    {
+              int num = atoi(yytext);
+              if (num % 2 == 0)
+                  printf("EVEN number: %d\n", num);
+              else
+                  printf("ODD number: %d\n", num);
+          }
+
+[ \t\n]   ; // Ignore 
+.         { printf("Invalid input: %s\n", yytext); }
+
 %%
 
 int main() {
+    printf("Enter numbers separated by space:\n");
     yylex();
     return 0;
 }
+
+
