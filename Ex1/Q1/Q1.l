@@ -1,16 +1,20 @@
 %{
-int word = 0, digit = 0, space = 0;
+#include <stdio.h>
+int word = 0, dgit = 0, spce = 0, spec = 0;
 %}
 
 %%
-[ \t\n]+      { space++; }
-[0-9]+        { digit++; }
-[a-zA-Z]+     { word++; }
-.             ; // Ignore other characters
+[ \t]+              { spce++; }
+[0-9]+              { dgit++; }
+[a-zA-Z]+           { word++; }
+[^a-zA-Z \t\n0-9]   { spec++; }
+\n                  ; // Ignore
 %%
 
 int main() {
     yylex();
-    printf("Words: %d\nDigits: %d\nSpaces: %d\n", word, digit, space);
+    printf("Words: %d\nDigits: %d\nSpaces: %d\nSpecials: %d\n", word, dgit, spce, spec);
     return 0;
 }
+
+

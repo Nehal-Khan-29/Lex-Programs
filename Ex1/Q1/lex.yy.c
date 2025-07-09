@@ -351,8 +351,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 5
-#define YY_END_OF_BUFFER 6
+#define YY_NUM_RULES 6
+#define YY_END_OF_BUFFER 7
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -362,7 +362,7 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[13] =
     {   0,
-        0,    0,    6,    4,    1,    1,    2,    3,    1,    2,
+        0,    0,    7,    4,    1,    5,    2,    3,    1,    2,
         3,    0
     } ;
 
@@ -400,18 +400,18 @@ static const YY_CHAR yy_ec[256] =
 
 static const YY_CHAR yy_meta[6] =
     {   0,
-        1,    2,    2,    3,    4
+        1,    2,    1,    3,    4
     } ;
 
 static const flex_int16_t yy_base[16] =
     {   0,
-        0,    0,    9,   10,    0,    0,    0,    0,    0,    0,
+        0,    0,    9,   10,    0,   10,    0,    0,    0,    0,
         0,   10,    6,    4,    2
     } ;
 
 static const flex_int16_t yy_def[16] =
     {   0,
-       12,    1,   12,   12,   13,   13,   14,   15,   13,   14,
+       12,    1,   12,   12,   13,   12,   14,   15,   13,   14,
        15,    0,   12,   12,   12
     } ;
 
@@ -443,9 +443,10 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "Q1.l"
 #line 2 "Q1.l"
-int word = 0, digit = 0, space = 0;
-#line 448 "lex.yy.c"
+#include <stdio.h>
+int word = 0, dgit = 0, spce = 0, spec = 0;
 #line 449 "lex.yy.c"
+#line 450 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -662,9 +663,9 @@ YY_DECL
 		}
 
 	{
-#line 5 "Q1.l"
+#line 6 "Q1.l"
 
-#line 668 "lex.yy.c"
+#line 669 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -722,32 +723,37 @@ do_action:	/* This label is used only to access EOF actions. */
 			goto yy_find_action;
 
 case 1:
-/* rule 1 can match eol */
 YY_RULE_SETUP
-#line 6 "Q1.l"
-{ space++; }
+#line 7 "Q1.l"
+{ spce++; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 7 "Q1.l"
-{ digit++; }
+#line 8 "Q1.l"
+{ dgit++; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 8 "Q1.l"
+#line 9 "Q1.l"
 { word++; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 9 "Q1.l"
-; // Ignore other characters
+#line 10 "Q1.l"
+{ spec++; }
 	YY_BREAK
 case 5:
+/* rule 5 can match eol */
 YY_RULE_SETUP
-#line 10 "Q1.l"
+#line 11 "Q1.l"
+; // Ignore
+	YY_BREAK
+case 6:
+YY_RULE_SETUP
+#line 12 "Q1.l"
 ECHO;
 	YY_BREAK
-#line 751 "lex.yy.c"
+#line 757 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1752,12 +1758,12 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 10 "Q1.l"
+#line 12 "Q1.l"
 
 
 int main() {
     yylex();
-    printf("Words: %d\nDigits: %d\nSpaces: %d\n", word, digit, space);
+    printf("Words: %d\nDigits: %d\nSpaces: %d\nSpecials: %d\n", word, dgit, spce, spec);
     return 0;
 }
 
