@@ -1,10 +1,12 @@
 %%
-[a-zA-Z_][a-zA-Z0-9_]*  { printf("Identifier: %s\n", yytext); }
-[ \t\n]+                ;
-.                       ; // Ignore other characters
+[a-z]+.in    { printf("Website"); }
+.+           { printf("Not a website"); }
+[ \t\n]+     ;
 %%
 
 int main() {
     yylex();
     return 0;
 }
+
+
